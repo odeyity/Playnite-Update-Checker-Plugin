@@ -1,0 +1,9 @@
+Id: SteamUpdate-plugin
+Name: Steam Update
+Author: Odeyity
+Version: 1.0.0
+Module: SteamUpdate.dll
+Type: GenericPlugin
+Links:
+    - Name: GitHub
+      Url: https://github.com/odeyity/Playnite-Steam-Update-Plugin
