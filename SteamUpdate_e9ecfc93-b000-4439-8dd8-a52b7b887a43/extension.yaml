@@ -1,7 +1,0 @@
-﻿Id: SteamUpdate_e9ecfc93-b000-4439-8dd8-a52b7b887a43
-Name: Generic Plugin
-Author: John Doe
-Version: 1.0
-Module: SteamUpdate.dll
-Type: GenericPlugin
-Icon: icon.png
