@@ -18,3 +18,4 @@ Packages:
     PackageUrl: https://github.com/odeyity/Playnite-Update-Checker-Plugin/releases/download/1.1.0/UpdateChecker_74fe180c-7038-4908-bec1-94194b73b2e4_1_1_0.pext
     Changelog:
       - Added Epic Games support
+      - Changed Path.txt location is now in ExtensionData to follow convention
