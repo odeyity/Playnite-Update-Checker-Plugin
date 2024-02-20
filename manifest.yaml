@@ -4,5 +4,11 @@ Packages:
     RequiredApiVersion: 6.2.0
     ReleaseDate: 2024-02-19
     PackageUrl: https://github.com/odeyity/Playnite-Steam-Update-Plugin/releases/download/1.0.0/SteamUpdate_e9ecfc93-b000-4439-8dd8-a52b7b887a43_1_0_0.pext
+  - Version: 1.0.1
+    RequiredApiVersion: 6.2.0
+    ReleaseDate: 2024-02-20
+    PackageUrl: https://github.com/odeyity/Playnite-Steam-Update-Plugin/releases/download/1.0.1/SteamUpdate_e9ecfc93-b000-4439-8dd8-a52b7b887a43_1_0_1.pext
     Changelog:
-      - 'Intial release'
+      - Added bytes downloaded count and update size count
+      - Fixed crash that occurs if the window is closed before entering steamapps folder on setup
+      - Changed wording in certain outputs
