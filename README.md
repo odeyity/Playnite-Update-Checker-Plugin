@@ -9,7 +9,7 @@ On Playnite startup, this C# plugin simply opens a python script compiled into a
 - [x] Epic Games support
 - [ ] Rewrite of plugin to be fully C#<br>
 - [ ] Theme integration<br>
-- [ ] Display download status<br>
+- [x] Display download status<br>
 
 Screenshots:<br>
 <img src="/screenshots/main_thumb.png">
