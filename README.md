@@ -6,7 +6,8 @@
 On Playnite startup, this C# plugin simply opens a python script compiled into an executable that reads appmanifest data for Steam and alerts the user of any games that have updates.
 #
 ❓ Support:<br>
-<a href="https://github.com/odeyity/Playnite-Update-Checker-Plugin/issues/new">Create an issue</a>
+<a href="https://github.com/odeyity/Playnite-Update-Checker-Plugin/issues/new">Create an issue</a><br>
+<a href="https://discord.gg/BrtABqe">Playnite Discord</a>
 
 
 🔆 Future additions checklist:<br>
