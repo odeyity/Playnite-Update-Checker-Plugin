@@ -4,6 +4,8 @@ Packages:
     RequiredApiVersion: 6.2.0
     ReleaseDate: 2024-02-19
     PackageUrl: https://github.com/odeyity/Playnite-Update-Checker-Plugin/releases/download/1.0.0/SteamUpdate_e9ecfc93-b000-4439-8dd8-a52b7b887a43_1_0_0.pext
+    Changelog:
+      - Initial release
   - Version: 1.0.1
     RequiredApiVersion: 6.2.0
     ReleaseDate: 2024-02-20
