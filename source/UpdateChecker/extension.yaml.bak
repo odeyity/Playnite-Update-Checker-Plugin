@@ -1,0 +1,7 @@
+﻿Id: UpdateChecker_74fe180c-7038-4908-bec1-94194b73b2e4
+Name: Update Checker
+Author: odeyity
+Version: 1.2.0
+Module: UpdateChecker.dll
+Type: GenericPlugin
+Icon: icon.png

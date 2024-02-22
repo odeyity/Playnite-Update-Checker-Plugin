@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="UpdateChecker.UpdateCheckerSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="600">
+    <StackPanel>
+        <TextBlock Text="Update Checker v1.2.0" Height="49" Width="684" FontSize="30" FontWeight="SemiBold"/>
+        <TextBlock Text="Settings:" Height="23" Width="603"/>
+        <CheckBox Name="startupenable" IsChecked="{Binding Settings.EnableStartup}" Checked="CheckBox_Checked">
+            <TextBlock Text="Show on startup"/>
+        </CheckBox>
+
+        <CheckBox Margin="30,0,0,0" IsEnabled="{Binding ElementName=enablefullscreen, Path=IsChecked}" IsChecked="{Binding Settings.EnableFullscreen}" Checked="CheckBox_Checked">
+            <TextBlock Text="Show in Fullscreen Mode"/>
+        </CheckBox>
+        <CheckBox Name="enablesteam" Margin="0,0,0,0" IsChecked="{Binding Settings.EnableSteam}" Checked="CheckBox_Checked">
+        <TextBlock Text="Enable Steam support"/>
+        </CheckBox>
+
+        <DockPanel  ToolTip="e.g C:/Program Files (x86)/Steam/steamapps" IsEnabled="{Binding ElementName=enablesteam, Path=IsChecked}"  Margin="30,0,0,10" HorizontalAlignment="Left" Width="350">
+            <TextBlock Text="Path:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Margin="10,0,0,0" Text="{Binding Settings.SteamPath}" Width="300" />
+        </DockPanel>
+        <CheckBox Margin="0,0,0,0" IsChecked="{Binding Settings.EnableEpic}" Checked="CheckBox_Checked">
+            <TextBlock Text="Enable Epic Games support"/>
+        </CheckBox>
+
+    </StackPanel>
+</UserControl>
+    

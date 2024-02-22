@@ -1,93 +1,186 @@
 import os
+import json
+
+
+path = open("..\\..\\Roaming\\Playnite\\ExtensionsData\\74fe180c-7038-4908-bec1-94194b73b2e4\\config.json", "r") # Attempts to read path txt to get path
+pathJ = json.load(path)
 
 try:
-    path = open("..\\..\\Roaming\\Playnite\\Extensions\\SteamUpdate_e9ecfc93-b000-4439-8dd8-a52b7b887a43\\manifestreader\\path.txt", "r").read() # Attempts to read path txt to get path
-except FileNotFoundError:
-    pathW = open("..\\..\\Roaming\\Playnite\\Extensions\\SteamUpdate_e9ecfc93-b000-4439-8dd8-a52b7b887a43\\manifestreader\\path.txt", "w") # If no file is found, creates a new file in write mode
-    while True:
-        newPath = input("Enter steamapps (e.g. C:\Program Files (x86)\Steam\steamapps) path: ") # Casts user's input as a new path
-        if "steamapps" in newPath: # Flimsy valid path check
-            if newPath[len(newPath) - 1] != "\\":
-                newPath = newPath + "\\" # If no backslash is at the end, one is added
-            pathW.write(newPath) # Writes path to path txt
-            pathW.close() # Closes path txt
-            path = open("..\\..\\Roaming\\Playnite\\Extensions\\SteamUpdate_e9ecfc93-b000-4439-8dd8-a52b7b887a43\\manifestreader\\path.txt", "r").read() # Reads path txt
-            break
-        print("Invalid path.")
+    enableSteam = pathJ["EnableSteam"]
+except KeyError:
+    enableSteam = True
 
-# If the path file is invalid it asks again for input
-if path == "":
-    while True:
-        pathW = open("..\\..\\Roaming\\Playnite\\Extensions\\SteamUpdate_e9ecfc93-b000-4439-8dd8-a52b7b887a43\\manifestreader\\path.txt", "w") # If no file is found, creates a new file in write mode
-        newPath = input("Enter steamapps (e.g. C:\Program Files (x86)\Steam\steamapps) path: ") # Casts user's input as a new path
-        if "steamapps" in newPath: # Flimsy valid path check
-            if newPath[len(newPath) - 1] != "\\":
-                newPath = newPath + "\\" # If no backslash is at the end, one is added
-            pathW.write(newPath) # Writes path to path txt
-            pathW.close() # Closes path txt
-            path = open("..\\..\\Roaming\\Playnite\\Extensions\\SteamUpdate_e9ecfc93-b000-4439-8dd8-a52b7b887a43\\manifestreader\\path.txt", "r").read() # Reads path txt
-            break
-        print("Invalid path.")
+try:
+    enableEpic = pathJ["EnableEpic"]
+except KeyError:
+    enableEpic = True
 
-# Initialises apps manifest list and steamapps contents list
-steamapps = os.listdir(path)
-apps = []
+if enableSteam == True:
+    steamPath = pathJ["SteamPath"]
+    # Steam
+    print("--------")
+    print("Steam:")
+    print("--------")
+    print()
 
-# Checks each file in steamapps if it is an app manifest to add to app manifest list
-for x in range(len(steamapps)):
-    if "appmanifest" in steamapps[x] and "tmp" not in steamapps[x]:
-        apps.append(steamapps[x])
-
-# Loops for every app manifest
-for x in range(len(apps)):
-    updated = True # Defaults to app being updated
-    bytes_needed = None # Defaults to null bytes
-    bytes_downloaded = None # Defaults to null bytes
-    acf_n = path + apps[x] # Casts app manifest file path
-    acf_f = open(acf_n, "r") # Opens app manifest file
-    acf_l = acf_f.readlines() # Reads app manifest file
-    for x in range(len(acf_l)): # Checks each line
-        line = acf_l[x] # Casts line as string
-        if "name" in line:
-            app_name = line.split("		", -1)[1].strip().replace("â„¢", "™") # Reads name off "name" line, casts value as string
-        if "BytesToDownload" in line:
-            bytes_needed = line.split("		", -1)[1] # Reads bytes to download off "BytesToDownload" line, casts value as string
-        elif "BytesDownloaded" in line:
-            bytes_downloaded = line.split("		", -1)[1] # Reads bytes downloaded off "BytesDownloaded" line, casts value as string
-        else:
-            updated = True # Resets to default if these keys aren't in file
-
-    if bytes_needed == None and bytes_downloaded == None:
-        updated = True
-    elif bytes_needed == bytes_downloaded:
-        updated = True
+    if steamPath == "":
+        print("Set up steamapps path in the addon settings.")
+    elif "steamapps" not in steamPath:
+        print("Invalid steamapps path.")
     else:
-        updated = False
+        if steamPath[len(steamPath) - 1] != "/":
+            steamPath = steamPath + "/"
+        # Initialises apps manifest list and steamapps contents list
+        steamapps = os.listdir(steamPath)
+        apps = []
 
-        # Converts ripped string from appmanifest to a float value
-        bytes_downloaded = bytes_downloaded.replace('"', "")
-        bytes_downloaded = float(bytes_downloaded.replace("\n", ""))
+        # Checks each file in steamapps if it is an app manifest to add to app manifest list
+        for x in range(len(steamapps)):
+            if "appmanifest" in steamapps[x] and "tmp" not in steamapps[x]:
+                apps.append(steamapps[x])
+        # Loops for every app manifest
+        for x in range(len(apps)):
+            updated = True # Defaults to app being updated
+            bytes_needed = None # Defaults to null bytes
+            bytes_downloaded = None # Defaults to null bytes
+            acf_n = steamPath + apps[x] # Casts app manifest file path
+            acf_f = open(acf_n, "r") # Opens app manifest file
+            acf_l = acf_f.readlines() # Reads app manifest file
+            for x in range(len(acf_l)): # Checks each line
+                line = acf_l[x] # Casts line as string
+                if "name" in line:
+                    app_name = line.split("		", -1)[1].strip().replace("â„¢", "™") # Reads name off "name" line, casts value as string
+                if "BytesToDownload" in line:
+                    bytes_needed = line.split("		", -1)[1] # Reads bytes to download off "BytesToDownload" line, casts value as string
+                elif "BytesDownloaded" in line:
+                    bytes_downloaded = line.split("		", -1)[1] # Reads bytes downloaded off "BytesDownloaded" line, casts value as string
+                else:
+                    updated = True # Resets to default if these keys aren't in file
 
-        bytes_needed = bytes_needed.replace('"', "")
-        bytes_needed = float(bytes_needed.replace("\n", ""))
+            if bytes_needed == None and bytes_downloaded == None:
+                updated = True
+            elif bytes_needed == bytes_downloaded:
+                updated = True
+            else:
+                updated = False
 
-        # Detects if bytes are big enough to be 1 GB, 1 MB or 1 KB
-        if bytes_needed >= 1000000000:
-            bytes_needed = str(f"{float(bytes_needed) / 1000000000:.2f}") + " GB" # Rounds to 2dp
-        elif bytes_needed >= 1000000 and bytes_needed < 1000000000:
-            bytes_needed = str(f"{float(bytes_needed) / 1000000:.2f}") + " MB"
-        else:
-            bytes_needed = str(f"{float(bytes_needed) / 1000:.2f}") + " KB"
+                # Converts ripped string from appmanifest to a float value
+                bytes_downloaded = bytes_downloaded.replace('"', "")
+                bytes_downloaded = float(bytes_downloaded.replace("\n", ""))
 
-        if bytes_downloaded >= 1000000000:
-            bytes_downloaded = str(f"{float(bytes_downloaded) / 1000000000:.2f}") + " GB"
-        elif bytes_downloaded >= 1000000 and bytes_downloaded < 1000000000:
-            bytes_downloaded = str(f"{float(bytes_downloaded) / 1000000:.2f}") + " MB"
-        else:
-            bytes_downloaded = str(f"{float(bytes_downloaded) / 1000:.2f}") + " KB"
-        
-        
-        print("The app", app_name, "has an update. (" + bytes_downloaded + " / " + bytes_needed + ")")
-    acf_f.close() # Closes app manifest file
+                bytes_needed = bytes_needed.replace('"', "")
+                bytes_needed = float(bytes_needed.replace("\n", ""))
+
+                # Detects if bytes are big enough to be 1 GB, 1 MB or 1 KB
+                if bytes_needed >= 1000000000:
+                    bytes_needed = str(f"{float(bytes_needed) / 1000000000:.2f}") + " GB" # Rounds to 2dp
+                elif bytes_needed >= 1000000 and bytes_needed < 1000000000:
+                    bytes_needed = str(f"{float(bytes_needed) / 1000000:.2f}") + " MB"
+                else:
+                    bytes_needed = str(f"{float(bytes_needed) / 1000:.2f}") + " KB"
+
+                if bytes_downloaded >= 1000000000:
+                    bytes_downloaded = str(f"{float(bytes_downloaded) / 1000000000:.2f}") + " GB"
+                elif bytes_downloaded >= 1000000 and bytes_downloaded < 1000000000:
+                    bytes_downloaded = str(f"{float(bytes_downloaded) / 1000000:.2f}") + " MB"
+                else:
+                    bytes_downloaded = str(f"{float(bytes_downloaded) / 1000:.2f}") + " KB"
+                
+                
+                print("The app", app_name, "has an update. (" + bytes_downloaded + " / " + bytes_needed + ")")
+            acf_f.close() # Closes app manifest file
+
+if enableEpic == True:
+    if os.path.exists("C:\\ProgramData\\Epic\\EpicGamesLauncher\\Data\\Manifests\\") == True:
+        # Epic Games
+        print()
+        print("-------------")
+        print("Epic Games:")
+        print("-------------")
+        print()
+
+        if os.path.exists("C:\\ProgramData\\Epic\\EpicGamesLauncher\\Data\\Manifests\\") == True:
+            updated = False
+
+            epic_path = "C:\\ProgramData\\Epic\\EpicGamesLauncher\\Data\\Manifests\\"
+            epic_path_pending = "C:\\ProgramData\\Epic\\EpicGamesLauncher\\Data\\Manifests\\Pending\\"
+            epic_m = os.listdir(epic_path)
+            epic_p = os.listdir(epic_path_pending)
+
+            epic_apps = []
+            epic_apps_date = []
+
+            for x in range(len(epic_m)):
+                if epic_m[x] == "Pending":
+                    pass 
+                else:
+                    epic_n = epic_path + epic_m[x] # Casts app manifest file epic_path
+                    epic_f = open(epic_n, "r") # Opens app manifest file
+                    epic_l = epic_f.readlines() # Reads app manifest file
+                for x in range(len(epic_l)): # Checks each line
+                    line = epic_l[x] # Casts line as string
+                    if "DisplayName" in line:
+                        app_name = line.split(": ", -1)[1].strip().replace(",", "").replace("Â", "") # Reads name off "name" line, casts value as string
+                        break
+                epic_date = float(os.path.getmtime(epic_n))
+                if app_name in epic_apps:
+                    order = epic_apps.index(app_name)
+                    if epic_apps_date[order] < epic_date:
+                        del epic_apps_date[order]
+                        del epic_apps[order]
+                    else:
+                        epic_apps.append(app_name)
+                        epic_apps_date.append(epic_date)
+                else:
+                    epic_apps.append(app_name)
+                    epic_apps_date.append(epic_date)
+
+            for x in range(len(epic_p)):
+                if epic_m[x] == "Pending":
+                    pass 
+                else:
+                    epic_n = epic_path_pending + epic_p[x] # Casts app manifest file epic_path
+                    epic_f = open(epic_n, "r") # Opens app manifest file
+                    epic_l = epic_f.readlines() # Reads app manifest file
+                for x in range(len(epic_l)): # Checks each line
+                    line = epic_l[x] # Casts line as string
+                    if "DisplayName" in line:
+                        app_name = line.split(": ", -1)[1].strip().replace(",", "").replace("Â", "") # Reads name off "name" line, casts value as string
+                    elif "StagingLocation" in line:
+                        install_loc = line.split(": ", -1)[1].strip().replace(",", "").replace("\\\\", "\\").replace("/", "\\").replace('"', '')
+                        if os.path.exists(install_loc) == True:
+                            def dir_size(path='.'):
+                                bytes = 0
+                                with os.scandir(path) as it:
+                                    for tmp in it:
+                                        if tmp.is_file():
+                                            bytes += tmp.stat().st_size
+                                        elif tmp.is_dir():
+                                            bytes += dir_size(tmp.path)
+                                return bytes
+
+                            bytes_downloaded = float(dir_size(install_loc))
+                    elif "InstallSize" in line:
+                        bytes_needed = float(line.split(": ", -1)[1].strip().replace(",", "").replace('"', ''))
+
+                epic_date = float(os.path.getmtime(epic_n))
+                if app_name in epic_apps:
+                    order = epic_apps.index(app_name)
+                    if epic_apps_date[order] < epic_date:
+                        updated = False
+                        if bytes_needed >= 1000000000:
+                            bytes_needed = str(f"{float(bytes_needed) / 1000000000:.2f}") + " GB" # Rounds to 2dp
+                        elif bytes_needed >= 1000000 and bytes_needed < 1000000000:
+                            bytes_needed = str(f"{float(bytes_needed) / 1000000:.2f}") + " MB"
+                        else:
+                            bytes_needed = str(f"{float(bytes_needed) / 1000:.2f}") + " KB"
+
+                        if bytes_downloaded >= 1000000000:
+                            bytes_downloaded = str(f"{float(bytes_downloaded) / 1000000000:.2f}") + " GB"
+                        elif bytes_downloaded >= 1000000 and bytes_downloaded < 1000000000:
+                            bytes_downloaded = str(f"{float(bytes_downloaded) / 1000000:.2f}") + " MB"
+                        else:
+                            bytes_downloaded = str(f"{float(bytes_downloaded) / 1000:.2f}") + " KB"
+                        print("The app", app_name, "has an update. (" + bytes_downloaded + " / " + bytes_needed + ")")
 
 input()
