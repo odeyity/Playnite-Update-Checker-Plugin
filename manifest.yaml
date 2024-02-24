@@ -28,3 +28,11 @@ Packages:
     Changelog:
     - Added settings page where you now enter the path and can configure the addon more
     - Added a sidebar icon to check for updates
+  - Version: 1.2.1
+    RequiredApiVersion: 6.2.0
+    ReleaseDate: 2024-02-24
+    PackageUrl: https://github.com/odeyity/Playnite-Update-Checker-Plugin/releases/download/1.2.1/UpdateChecker_74fe180c-7038-4908-bec1-94194b73b2e4_1_2_1.pext
+    Changelog:
+    - Fixed situation where the cmd window wouldnt open or crash due to incorrect path format
+
+
