@@ -13,13 +13,23 @@ namespace UpdateChecker
     public class UpdateCheckerSettings : ObservableObject
     {
         private bool enablefullscreen = false;
+        private int path_slider = 1;
         private string steampath = String.Empty;
+        private string steampath2 = String.Empty;
+        private string steampath3 = String.Empty;
+        private string steampath4 = String.Empty;
+        private string steampath5 = String.Empty;
         private bool enablestartup = false;
         private bool enablesteam = true;
         private bool enableepic = true;
 
         public bool EnableFullscreen { get => enablefullscreen; set => SetValue(ref enablefullscreen, value); }
+        public int PathSlider { get => path_slider; set => SetValue(ref path_slider, value); }
         public string SteamPath { get => steampath; set => steampath = value; }
+        public string SteamPath2 { get => steampath2; set => steampath2 = value; }
+        public string SteamPath3 { get => steampath3; set => steampath3 = value; }
+        public string SteamPath4 { get => steampath4; set => steampath4 = value; }
+        public string SteamPath5 { get => steampath5; set => steampath5 = value; }
         public bool EnableStartup { get => enablestartup; set => SetValue(ref enablestartup, value); }
         public bool EnableSteam { get => enablesteam; set => SetValue(ref enablesteam, value); }
         public bool EnableEpic { get => enableepic; set => SetValue(ref enableepic, value); }

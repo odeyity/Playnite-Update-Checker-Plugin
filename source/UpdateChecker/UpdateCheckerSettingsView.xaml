@@ -5,24 +5,115 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600">
+    <UserControl.Resources>
+        <Style x:Key ="steampath2" TargetType="DockPanel">
+            <Setter Property="Visibility" Value="Hidden"/>
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding ElementName=path_slider, Path=Value}" Value="2">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=path_slider, Path=Value}" Value="3">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=path_slider, Path=Value}" Value="4">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=path_slider, Path=Value}" Value="5">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key ="steampath3" TargetType="DockPanel">
+            <Setter Property="Visibility" Value="Hidden"/>
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding ElementName=path_slider, Path=Value}" Value="3">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=path_slider, Path=Value}" Value="4">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=path_slider, Path=Value}" Value="5">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key ="steampath4" TargetType="DockPanel">
+            <Setter Property="Visibility" Value="Hidden"/>
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding ElementName=path_slider, Path=Value}" Value="4">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=path_slider, Path=Value}" Value="5">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key ="steampath5" TargetType="DockPanel">
+            <Setter Property="Visibility" Value="Hidden"/>
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding ElementName=path_slider, Path=Value}" Value="5">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </UserControl.Resources>
+        
     <StackPanel>
-        <TextBlock Text="Update Checker v1.2.0" Height="49" Width="684" FontSize="30" FontWeight="SemiBold"/>
+        <TextBlock Text="Update Checker" Height="49" Width="684" FontSize="30" FontWeight="SemiBold"/>
         <TextBlock Text="Settings:" Height="23" Width="603"/>
         <CheckBox Name="startupenable" IsChecked="{Binding Settings.EnableStartup}" Checked="CheckBox_Checked">
             <TextBlock Text="Show on startup"/>
         </CheckBox>
 
-        <CheckBox Margin="30,0,0,0" IsEnabled="{Binding ElementName=enablefullscreen, Path=IsChecked}" IsChecked="{Binding Settings.EnableFullscreen}" Checked="CheckBox_Checked">
+        <CheckBox Margin="30,0,0,0" IsEnabled="{Binding ElementName=startupenable, Path=IsChecked}" IsChecked="{Binding Settings.EnableFullscreen}" Checked="CheckBox_Checked">
             <TextBlock Text="Show in Fullscreen Mode"/>
         </CheckBox>
         <CheckBox Name="enablesteam" Margin="0,0,0,0" IsChecked="{Binding Settings.EnableSteam}" Checked="CheckBox_Checked">
-        <TextBlock Text="Enable Steam support"/>
+            <TextBlock Text="Enable Steam support"/>
         </CheckBox>
 
-        <DockPanel  ToolTip="e.g C:/Program Files (x86)/Steam/steamapps" IsEnabled="{Binding ElementName=enablesteam, Path=IsChecked}"  Margin="30,0,0,10" HorizontalAlignment="Left" Width="350">
-            <TextBlock Text="Path:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Margin="10,0,0,0" Text="{Binding Settings.SteamPath}" Width="300" />
+        <DockPanel ToolTip="e.g C:/Program Files (x86)/Steam/steamapps" IsEnabled="{Binding ElementName=enablesteam, Path=IsChecked}"  Margin="30,0,0,10" HorizontalAlignment="Left" Width="350" Height="21">
+            <TextBlock Text="Number of paths: " Margin="0,0,10,0" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top"/>
+            <Slider Name="path_slider" Value="{Binding Settings.PathSlider}" Maximum="5" Minimum="1" Width="200" IsSnapToTickEnabled="True" TickFrequency="1"/>
+            <TextBlock Text="{Binding ElementName=path_slider, Path=Value}" Margin="10,0,0,0" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top"/>
         </DockPanel>
+
+
+        <DockPanel ToolTip="e.g C:/Program Files (x86)/Steam/steamapps" IsEnabled="{Binding ElementName=enablesteam, Path=IsChecked}"  Margin="30,0,0,10" HorizontalAlignment="Left" Width="350" Height="21">
+            <TextBlock Text="Path:" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top"/>
+            <TextBox Margin="10,0,0,0" Text="{Binding Settings.SteamPath}" Height="20" VerticalAlignment="Top" Width="300" />
+        </DockPanel>
+
+        <DockPanel Style="{StaticResource steampath2}" ToolTip="e.g C:/Program Files (x86)/Steam/steamapps" IsEnabled="{Binding ElementName=enablesteam, Path=IsChecked}" Margin="30,0,0,10" HorizontalAlignment="Left" Width="350" Height="21">
+            <TextBlock Text="Path 2:" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top"/>
+            <TextBox Margin="10,0,0,0" Text="{Binding Settings.SteamPath2}" Height="20" VerticalAlignment="Top" Width="300" />
+        </DockPanel>
+
+        <DockPanel Style="{StaticResource steampath3}" ToolTip="e.g C:/Program Files (x86)/Steam/steamapps" IsEnabled="{Binding ElementName=enablesteam, Path=IsChecked}" Margin="30,0,0,10" HorizontalAlignment="Left" Width="350" Height="21">
+            <TextBlock Text="Path 3:" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top"/>
+            <TextBox Margin="10,0,0,0" Text="{Binding Settings.SteamPath3}" Height="20" VerticalAlignment="Top" Width="300" />
+        </DockPanel>
+
+        <DockPanel Style="{StaticResource steampath4}" ToolTip="e.g C:/Program Files (x86)/Steam/steamapps" IsEnabled="{Binding ElementName=enablesteam, Path=IsChecked}" Margin="30,0,0,10" HorizontalAlignment="Left" Width="350" Height="21">
+            <TextBlock Text="Path 4:" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top"/>
+            <TextBox Margin="10,0,0,0" Text="{Binding Settings.SteamPath4}" Height="20" VerticalAlignment="Top" Width="300" />
+        </DockPanel>
+        
+        <DockPanel Style="{StaticResource steampath5}" ToolTip="e.g C:/Program Files (x86)/Steam/steamapps" IsEnabled="{Binding ElementName=enablesteam, Path=IsChecked}" Margin="30,0,0,10" HorizontalAlignment="Left" Width="350" Height="21">
+            <TextBlock Text="Path 5:" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top"/>
+            <TextBox Margin="10,0,0,0" Text="{Binding Settings.SteamPath5}" Height="20" VerticalAlignment="Top" Width="300" />
+        </DockPanel>
+        
+
+        
+
+
         <CheckBox Margin="0,0,0,0" IsChecked="{Binding Settings.EnableEpic}" Checked="CheckBox_Checked">
             <TextBlock Text="Enable Epic Games support"/>
         </CheckBox>

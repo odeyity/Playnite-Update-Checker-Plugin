@@ -36,7 +36,7 @@ namespace UpdateChecker
 
 
         // Path to python script
-        public string py_path = "..\\..\\Roaming\\Playnite\\Extensions\\UpdateChecker_74fe180c-7038-4908-bec1-94194b73b2e4\\manifestreader\\manifestreader.exe";
+        public string py_path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "\\manifestreader\\manifestreader.exe";
         public override void OnGameInstalled(OnGameInstalledEventArgs args)
         {
             // Add code to be executed when game is finished installing.
@@ -64,6 +64,7 @@ namespace UpdateChecker
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
+            logger.Info(py_path);
             // Add code to be executed when Playnite is initialized.
             if (settings.Settings.EnableStartup == true)
             {
