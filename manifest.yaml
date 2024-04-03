@@ -34,5 +34,13 @@ Packages:
     PackageUrl: https://github.com/odeyity/Playnite-Update-Checker-Plugin/releases/download/1.2.1/UpdateChecker_74fe180c-7038-4908-bec1-94194b73b2e4_1_2_1.pext
     Changelog:
     - Fixed situation where the cmd window wouldnt open or crash due to incorrect path format
+  - Version: 1.3.0
+    RequiredApiVersion: 6.2.0
+    ReleaseDate: 2024-04-03
+    PackageUrl: https://github.com/odeyity/Playnite-Update-Checker-Plugin/releases/download/1.3.0/UpdateChecker_74fe180c-7038-4908-bec1-94194b73b2e4_1_3_0.pext
+    Changelog:
+    - Added support for 5 Steam manifest paths
+    - Fixed crash when loading certain games on Epic Games
+  
 
 
