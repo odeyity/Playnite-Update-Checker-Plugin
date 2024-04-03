@@ -1,7 +1,7 @@
 <img src="icon.png" width="64" height="64"></img>
 # Update Checker Plugin
 <a href="https://playnite.link/addons.html#UpdateChecker_74fe180c-7038-4908-bec1-94194b73b2e4"><img src="buttons/install.png" width="90" height="50"></img></a>
-<a href="https://github.com/odeyity/Playnite-Update-Checker-Plugin/releases/download/1.2.1/UpdateChecker_74fe180c-7038-4908-bec1-94194b73b2e4_1_2_1.pext"><img src="buttons/download.png" width="90" height="50"></img></a>
+<a href="https://github.com/odeyity/Playnite-Update-Checker-Plugin/releases/download/1.3.0/UpdateChecker_74fe180c-7038-4908-bec1-94194b73b2e4_1_3_0.pext"><img src="buttons/download.png" width="90" height="50"></img></a>
 
 On Playnite startup, this C# plugin simply opens a python script compiled into an executable that reads appmanifest data for Steam and alerts the user of any games that have updates.
 #
