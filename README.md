@@ -9,6 +9,9 @@ On Playnite startup, this C# plugin simply opens a python script compiled into a
 <a href="https://github.com/odeyity/Playnite-Update-Checker-Plugin/issues/new">Create an issue</a><br>
 <a href="https://discord.gg/BrtABqe">Playnite Discord</a>
 
+#
+⚙️ How to use:<br>
+Go to addon settings and enter the steamapps path ```Example: C:/Program Files (x86)/Steam/steamapps```
 
 🔆 Future additions checklist:<br>
 - [x] Epic Games support
