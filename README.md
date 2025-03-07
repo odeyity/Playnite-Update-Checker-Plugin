@@ -15,7 +15,7 @@ Go to addon settings and enter the steamapps path ```Example: C:/Program Files (
 
 🔆 Future additions checklist:<br>
 - [x] Epic Games support
-- [ ] Rewrite of plugin to be fully C#<br>
+- [ ] Full C# Rewrite<br>
 - [ ] Theme integration<br>
 - [x] Display download status<br>
 #
