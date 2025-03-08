@@ -93,12 +93,15 @@ if enableSteam == True:
                 bytes_downloaded = None # Defaults to null bytes
                 acf_n = steamPath + apps[x] # Casts app manifest file path
 		    
-                # Attempts Unicode encoding, fallback to CP-1252
+                # Attempts Unicode encoding, fallback to CP-1252 and then to default
             	try:
                 	acf_f = open(acf_n, "r", encoding="utf-8") # Opens app manifest file
             	except UnicodeDecodeError:
-                	acf_f = open(acf_n, "r", encoding="cp1252")
-			
+			try:
+                		acf_f = open(acf_n, "r", encoding="cp1252")
+			except UnicodeDecodeError:
+				acf_f = open(acf_n, "r")
+				
                 acf_l = acf_f.readlines() # Reads app manifest file
                 for x in range(len(acf_l)): # Checks each line
                     line = acf_l[x] # Casts line as string
