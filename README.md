@@ -1,3 +1,6 @@
+> [!NOTE]
+> Due to lack of time and motivation I cannot continue with the project, I might come back to it later on if I get the time but as of now it is abandoned. Any forks or pull requests are welcome, I was planning to port it into C# eventually.
+
 <img src="icon.png" width="64" height="64"></img>
 # Update Checker Plugin
 <a href="https://playnite.link/addons.html#UpdateChecker_74fe180c-7038-4908-bec1-94194b73b2e4"><img src="buttons/install.png" width="90" height="50"></img></a>
